@@ -33,6 +33,7 @@ jobs:
         PRJ_NAME: libmbim
         PRJ_BRANCH: mbim-1-28
       run: |
+        cd ~/sdk
         git clone -b $PRJ_BRANCH --depth 1 https://gitlab.freedesktop.org/mobile-broadband/$PRJ_NAME.git package/libmbim
         cd $PRJ_NAME
         meson setup build --prefix=/usr --buildtype=release -Dwerror=true
