@@ -48,12 +48,12 @@ jobs:
         echo $PKG_HASH
         mv $BUILD_DIR/$PRJ_NAME-*.tar.xz ../.
         cd ..
-        mkdir -p packages/libs/$PRJ_NAME
+        mkdir -p package/$PRJ_NAME
         curl --location --output package/libmbim/Makefile "https://raw.githubusercontent.com/openwrt/packages/master/libs/libmbim/Makefile"'
         sed -i 's/^PKG_VERSION.*/PKG_VERSION:='"$VERSION"'/' package/libmbim/Makefile
-        sed -i 's/^PKG_MIRROR_HASH.*/PKG_MIRROR_HASH:='"$PKG_MIRROR_HASH"'/' packages/libmbim/Makefile
-        sed -i 's/^PKG_SOURCE_URL.*/PKG_SOURCE_URL:=file:\/\/\/home\/build\/build_dir\/dl\//' packages/libmbim/Makefile
-        cat packages/libs/libmbim/Makefile
+        sed -i 's/^PKG_MIRROR_HASH.*/PKG_MIRROR_HASH:='"$PKG_MIRROR_HASH"'/' package/libmbim/Makefile
+        sed -i 's/^PKG_SOURCE_URL.*/PKG_SOURCE_URL:=file:\/\/\/home\/build\/build_dir\/dl\//' package/libmbim/Makefile
+        cat package/libmbim/Makefile
     - name: Download Packages
       run: |
         cd ~/sdk
