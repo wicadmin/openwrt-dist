@@ -31,8 +31,9 @@ jobs:
     - name: Prep libmbim
       env:
         PRJ_NAME: libmbim
+        PRJ_BRANCH: mbim-1-28
       run: |
-        git clone -b master --depth 1 https://gitlab.freedesktop.org/mobile-broadband/$PRJ_NAME.git package/libmbim
+        git clone -b $PRJ_BRANCH --depth 1 https://gitlab.freedesktop.org/mobile-broadband/$PRJ_NAME.git package/libmbim
         cd $PRJ_NAME
         meson setup build --prefix=/usr --buildtype=release -Dwerror=true
         ninja -C build
