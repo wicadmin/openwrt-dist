@@ -35,25 +35,6 @@ jobs:
       run: |
         cd ~/sdk
         git clone -b $PRJ_BRANCH --depth 1 https://gitlab.freedesktop.org/mobile-broadband/$PRJ_NAME.git package/libmbim
-        cd package/$PRJ_NAME
-        meson setup build --prefix=/usr --buildtype=release -Dwerror=true
-        ninja -C build
-        ninja -C build install
-        ninja -C build dist
-        tree build
-        tree /usr/local
-        VERSION=$(echo $BUILD_DIR/$PRJ_NAME* | sed 's/^.*libmbim-\([^tar]*\)[.].*/\1/')
-        PKG_HASH=$(sha256sum $BUILD_DIR/$PRJ_NAME-*.tar.xz | awk '{print $1;}')
-        echo $VERSION
-        echo $PKG_HASH
-        mv $BUILD_DIR/$PRJ_NAME-*.tar.xz ../.
-        cd ..
-        mkdir -p package/$PRJ_NAME
-        curl --location --output package/libmbim/Makefile "https://raw.githubusercontent.com/openwrt/packages/master/libs/libmbim/Makefile"'
-        sed -i 's/^PKG_VERSION.*/PKG_VERSION:='"$VERSION"'/' package/libmbim/Makefile
-        sed -i 's/^PKG_MIRROR_HASH.*/PKG_MIRROR_HASH:='"$PKG_MIRROR_HASH"'/' package/libmbim/Makefile
-        sed -i 's/^PKG_SOURCE_URL.*/PKG_SOURCE_URL:=file:\/\/\/home\/build\/build_dir\/dl\//' package/libmbim/Makefile
-        cat package/libmbim/Makefile
     - name: Download Packages
       run: |
         cd ~/sdk
