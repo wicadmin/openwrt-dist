@@ -35,7 +35,7 @@ jobs:
       run: |
         cd ~/sdk
         git clone -b $PRJ_BRANCH --depth 1 https://gitlab.freedesktop.org/mobile-broadband/$PRJ_NAME.git package/libmbim
-        cd $PRJ_NAME
+        cd package/$PRJ_NAME
         meson setup build --prefix=/usr --buildtype=release -Dwerror=true
         ninja -C build
         ninja -C build install
