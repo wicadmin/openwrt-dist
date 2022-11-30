@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Env for Openwrt SDK
-      run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev
+      run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev meson ninja-build
     - name: Download Openwrt SDK
       env:
         SDK_URL: ${{ matrix.SDK_URL }}
