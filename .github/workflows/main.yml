@@ -32,11 +32,12 @@ jobs:
       env:
         PRJ_NAME: libmbim
         PRJ_BRANCH: mbim-1-28
+        VERSION: 1.28.0
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
         svn checkout https://github.com/openwrt/packages/trunk/libs/libmbim package/libmbim
-        sed -i 's/^PKG_VERSION.*/PKG_VERSION:='"$VERSION"'/' package/libmbim/Makefile
+        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/libmbim/Makefile
         cat package/libmbim/Makefile
     - name: Download Packages
       run: |
