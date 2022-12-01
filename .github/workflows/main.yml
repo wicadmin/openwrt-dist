@@ -66,7 +66,7 @@ jobs:
         cd ~/sdk
         make defconfig
         # Edit config
-        make V=sc
+        make V=s
     - name: Upload
       env:
         SDK_URL: ${{ matrix.SDK_URL }}
