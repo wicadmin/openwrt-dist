@@ -36,9 +36,9 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        svn checkout https://github.com/openwrt/packages/trunk/libs/libmbim package/libmbim
-        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/libmbim/Makefile
-        cat package/libmbim/Makefile
+        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
+        cat package/$PRJ_NAME/Makefile
     - name: Download Packages
       run: |
         cd ~/sdk
