@@ -20,8 +20,11 @@ jobs:
       run: |
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $SDK_URL)
         # Upload base only
-        mkdir sdk
-        cd ~/sdk/bin/packages/*/base
+        mkdir ~/sdk/folder1
+        cd ~/sdk
+        touch test1.txt
+        touch test2.txt
+        touch folder1/test3.txt        
         git init
         git config user.name "bot"
         git config user.email "bot@github.com"
