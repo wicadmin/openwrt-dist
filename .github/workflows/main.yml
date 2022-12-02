@@ -76,7 +76,6 @@ jobs:
         # Upload base only
         cd ~/sdk/bin/packages/*/base
         git init
-        git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/wicadmin/openwrt-dist.git
         git config user.name "bot"
         git config user.email "bot@github.com"
         git add .
