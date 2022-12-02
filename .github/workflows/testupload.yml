@@ -12,7 +12,7 @@ jobs:
         SDK_URL:
         - https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-sdk-22.03.2-x86-64_gcc-11.2.0_musl.Linux-x86_64.tar.xz
     steps:
-    - uses: actions/master@v2
+    - uses: actions/checkout@master
       with:
         access-token: x-access-token:${{ secrets.GITHUB_TOKEN }}
     - name: Upload
