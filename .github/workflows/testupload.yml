@@ -1,4 +1,4 @@
-name: Openwrt Build Bot
+name: Openwrt Test Upload
 on:
   [workflow_dispatch]
 
