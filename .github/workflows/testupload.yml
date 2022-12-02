@@ -20,7 +20,7 @@ jobs:
       run: |
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $SDK_URL)
         # Upload base only
-        mkdir ~/sdk/folder1
+        mkdir -p ~/sdk/folder1
         cd ~/sdk
         touch test1.txt
         touch test2.txt
