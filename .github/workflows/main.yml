@@ -149,7 +149,7 @@ jobs:
       env:
         PROFILE: ${{ matrix.PROFILE }}
         IB_URL: ${{ matrix.IB_URL }}
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         IB_HOME=$(basename $IB_URL|head -c -8)
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $IB_URL)
