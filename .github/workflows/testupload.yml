@@ -1,7 +1,8 @@
 name: Openwrt Test Upload
 on:
-  push:
-    branches: master
+#  push:
+#    branches: master
+  [workflow_dispatch]
 
 jobs:
   buildpkg:
