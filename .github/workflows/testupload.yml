@@ -1,0 +1,30 @@
+name: Openwrt Build Bot
+on:
+  [workflow_dispatch]
+
+jobs:
+  buildpkg:
+    name: Test Upload
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        SDK_URL:
+        - https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-sdk-22.03.2-x86-64_gcc-11.2.0_musl.Linux-x86_64.tar.xz
+    steps:
+    - uses: actions/checkout@master
+    - name: Upload
+      env:
+        SDK_URL: ${{ matrix.SDK_URL }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $SDK_URL)
+        # Upload base only
+        mkdir sdk
+        cd ~/sdk/bin/packages/*/base
+        git init
+        git config user.name "bot"
+        git config user.email "bot@github.com"
+        git add .
+        git commit -m "$TAG$(TZ='America/New_York' date +@%Y%m%d)"
+        git push --force --quiet "https://$GITHUB_TOKEN@github.com/wicadmin/openwrt-dist.git" HEAD:$TAG
