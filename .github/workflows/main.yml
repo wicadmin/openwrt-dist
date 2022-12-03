@@ -89,7 +89,7 @@ jobs:
         #git clone -b master https://github.com/shadowsocks/openwrt-feeds package/custom
         ##pushd package/openwrt-dist-luci/tools/po2lmo ; make && sudo make install ; popd
         ./scripts/feeds update -a
-        # ./scripts/feeds install golang c-ares libev libopenssl libsodium mbedtls pcre libncursesw6 glib2
+        # ./scripts/feeds install golang c-ares libev libopenssl libsodium mbedtls pcre libncursesw6 glib2 dbus ppp
         ./scripts/feeds install glib2
     - name: Compile
       run: |
