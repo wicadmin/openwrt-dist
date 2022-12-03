@@ -19,6 +19,14 @@ jobs:
         SDK_URL:
         - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 512
+        swap-size-mb: 1024
+        remove-dotnet: 'true'
+        remove-android: 'true'
+        remove-haskell: 'true'
     - uses: actions/checkout@master
     - name: Assemble Variable
       run: |
