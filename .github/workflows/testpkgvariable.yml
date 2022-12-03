@@ -1,4 +1,4 @@
-name: Openwrt Test Upload
+name: Openwrt Test Variable
 on:
 #  push:
 #    branches: master
