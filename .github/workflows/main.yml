@@ -157,7 +157,7 @@ jobs:
       run: |
         IB_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-${OWRT_TARGET}_${OWRT_SUBTARGET}.tar.xz
         DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
-                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g' | tr '\n' ' ')
+                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libustream-wolfssl//g' | tr '\n' ' ')
         PACKAGES="$DEFAULT_PACKAGES \
           -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn \
           luci-proto-qmi fdisk mosquitto-client-nossl mosquitto-nossl unzip usb-modeswitch \
@@ -172,7 +172,7 @@ jobs:
           kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan gdb jq jsonfilter speedtest-netperf \
           -ddns-scripts -ddns-scripts_no-ip_com -ext-samba -ext-sms -kmod-e1000 -kmod-i2c-algo-bit memcached foolsm \
           -kmod-i2c-core -kmod-ppp -kmod-pppoe -kmod-pppox -ppp-mod-pppoe -kmod-e1000e -kmod-usb-net-huawei-cdc-ncm \
-          -libsodium -libustream-mbedtls -libustream-wolfssl -libustream-openssl -luci-app-hotspot \
+          -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
           -luci-app-samba -luci-proto-ppp -luci-theme-bootstrap -luci-theme-darkmatter -mwan3 -ntfs-3g -px5g-mbedtls \
           -p910nd -luci-app-p910nd -ext-p910nd -samba36-server -wireless-tools -wpad-mini -wwan rclone"
         IB_HOME=$(basename $IB_URL|head -c -8)
