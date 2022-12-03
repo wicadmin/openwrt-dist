@@ -43,3 +43,5 @@ jobs:
           -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
           -luci-app-samba -luci-proto-ppp -luci-theme-bootstrap -luci-theme-darkmatter -mwan3 -ntfs-3g -px5g-mbedtls \
           -p910nd -luci-app-p910nd -ext-p910nd -samba36-server -wireless-tools -wpad-mini -wwan"
+        echo $FINAL_PACKAGE_LIST
+      
