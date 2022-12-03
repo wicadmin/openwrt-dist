@@ -23,7 +23,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Env for Openwrt SDK
-      run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus
+      run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus xsltproc
     - name: Download Openwrt SDK
       run: |
         SDK_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-${OWRT_SUBTARGET}_gcc-${OWRT_SDK_VERSION}_musl.Linux-${OWRT_TARGET}_${OWRT_SUBTARGET}.tar.xz
