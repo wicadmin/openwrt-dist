@@ -11,7 +11,7 @@ env:
   OWRT_TARGET: x86
   OWRT_SUBTARGET: 64
   OWRT_SDK_VERSION: 11.2.0
-  # SDK_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-${OWRT_SUBTARGET}_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+  # SDK_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
   # IB_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
       run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus
     - name: Download Openwrt SDK
       run: |
-        SDK_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+        SDK_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-${OWRT_SUBTARGET}_gcc-${OWRT_SDK_VERSION}_musl.Linux-${OWRT_TARGET}_${OWRT_SUBTARGET}.tar.xz
         SDK_HOME=$(head -c -8 <<< $(basename $SDK_URL))
         wget $SDK_URL
         tar xf $(basename $SDK_URL) -C ~/
