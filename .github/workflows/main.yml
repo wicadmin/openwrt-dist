@@ -11,6 +11,8 @@ env:
   OWRT_TARGET: x86
   OWRT_SUBTARGET: 64
   OWRT_SDK_VERSION: 11.2.0
+  SDK_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+  IB_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
 
 jobs:
   buildpkg:
@@ -18,16 +20,11 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
-      matrix:
-        SDK_URL:
-        - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
     steps:
     - uses: actions/checkout@master
     - name: Env for Openwrt SDK
       run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus
     - name: Download Openwrt SDK
-      env:
-        SDK_URL: ${{ matrix.SDK_URL }}
       run: |
         SDK_HOME=$(head -c -8 <<< $(basename $SDK_URL))
         wget $SDK_URL
@@ -126,21 +123,16 @@ jobs:
       matrix:
         include:
         - PROFILE: generic.x86_64
-          IB_URL: https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-imagebuilder-22.03.2-x86-64.Linux-x86_64.tar.xz
           INCLUDE_FILES: false
     steps:
     - uses: actions/checkout@master
     - name: Env for Openwrt ImageBuilder
       run: sudo apt install -y libncurses-dev
     - name: Download Openwrt ImageBuilder
-      env:
-        IB_URL: ${{ matrix.IB_URL }}
       run: |
         wget $IB_URL
         tar xf $(basename $IB_URL)
     - name: Fetch Files
-      env:
-        IB_URL: ${{ matrix.IB_URL }}
       if: matrix.INCLUDE_FILES
       run: |
         IB_HOME=$(basename $IB_URL|head -c -8)
@@ -159,7 +151,6 @@ jobs:
       shell: bash
       env:
         PROFILE: ${{ matrix.PROFILE }}
-        IB_URL: ${{ matrix.IB_URL }}
       run: |
         DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
                         sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g' | tr '\n' ' ')
@@ -193,7 +184,6 @@ jobs:
       id: upload
       env:
         PROFILE: ${{ matrix.PROFILE }}
-        IB_URL: ${{ matrix.IB_URL }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         IB_HOME=$(basename $IB_URL|head -c -8)
