@@ -31,12 +31,41 @@ jobs:
     - name: Prep libmbim
       env:
         PRJ_NAME: libmbim
-        PRJ_BRANCH: mbim-1-28
-        VERSION: 1.28.0
+        VERSION: 1.28.2
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
         svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
+        cat package/$PRJ_NAME/Makefile
+    - name: Prep libqrtr-glib
+      env:
+        PRJ_NAME: libqrtr-glib
+        VERSION: 1.2.2
+      run: |
+        cd ~/sdk
+        # mkdir -p package/$PRJ_NAME
+        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
+        cat package/$PRJ_NAME/Makefile
+    - name: Prep libqmi
+      env:
+        PRJ_NAME: libqmi
+        VERSION: 1.32.2
+      run: |
+        cd ~/sdk
+        # mkdir -p package/$PRJ_NAME
+        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
+        cat package/$PRJ_NAME/Makefile
+    - name: Prep modemmanager
+      env:
+        PRJ_NAME: modemmanager
+        VERSION: 1.20.2
+      run: |
+        cd ~/sdk
+        # mkdir -p package/$PRJ_NAME
+        svn checkout https://github.com/openwrt/packages/trunk/net/$PRJ_NAME package/$PRJ_NAME
         sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
         cat package/$PRJ_NAME/Makefile
     - name: Download Packages
