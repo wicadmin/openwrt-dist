@@ -1,0 +1,27 @@
+name: Openwrt Test Upload
+on:
+#  push:
+#    branches: master
+  [workflow_dispatch]
+env:
+  OWRT_RELEASE: 22.03.2
+  OWRT_TARGET: x86
+  OWRT_SUBTARGET: 64
+  OWRT_SDK_VERSION: 11.2.0
+
+jobs:
+  buildpkg:
+    name: Test Package Variable
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        SDK_URL:
+        - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+    steps:
+    - uses: actions/checkout@master
+    - name: Assemble Variable
+      run: |
+        DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
+                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g' | tr '\n' ' ')
+        echo $DEFAULT_PACKAGES
