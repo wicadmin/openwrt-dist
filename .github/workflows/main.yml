@@ -155,7 +155,7 @@ jobs:
       run: |
         IB_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-${OWRT_TARGET}_${OWRT_SUBTARGET}.tar.xz
         DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
-                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g' | tr '\n' ' ')
+                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libwolfssl5.5.1.ee39414e//g' | tr '\n' ' ')
         #                sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libustream-wolfssl20201210//g; s/libwolfssl5.5.1.ee39414e//g' | tr '\n' ' ')
         PACKAGES="$DEFAULT_PACKAGES \
           -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn \
@@ -173,7 +173,7 @@ jobs:
           -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
           -luci-app-samba -luci-proto-ppp -luci-theme-bootstrap -luci-theme-darkmatter -mwan3 -ntfs-3g -px5g-mbedtls \
           -p910nd -luci-app-p910nd -ext-p910nd -samba36-server -wireless-tools -wpad-mini -wwan rclone \
-          -openvpn-openssl -luci-ssl-openssl"
+          -openvpn-openssl -luci-ssl-openssl libwolfssl5.5.3.ee39414e"
         IB_HOME=$(basename $IB_URL|head -c -8)
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $IB_URL)
         cd $IB_HOME
