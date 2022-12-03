@@ -19,6 +19,14 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 512
+        swap-size-mb: 1024
+        remove-dotnet: 'true'
+        remove-android: 'true'
+        remove-haskell: 'true'
     - uses: actions/checkout@master
     - name: Env for Openwrt SDK
       run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus xsltproc
