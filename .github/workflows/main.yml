@@ -1,10 +1,16 @@
 name: Openwrt Build Bot
 on:
-  # push:
-  #  branches: master
+   push:
+    branches: master
   #schedule:
   #- cron: 0 0 * * *
-  [workflow_dispatch]
+  # [workflow_dispatch]
+
+env:
+  OWRT_RELEASE: 22.03.2
+  OWRT_TARGET: x86
+  OWRT_SUBTARGET: 64
+  OWRT_SDK_VERSION: 11.2.0
 
 jobs:
   buildpkg:
@@ -14,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         SDK_URL:
-        - https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-sdk-22.03.2-x86-64_gcc-11.2.0_musl.Linux-x86_64.tar.xz
+        - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
     steps:
     - uses: actions/checkout@master
     - name: Env for Openwrt SDK
@@ -121,14 +127,6 @@ jobs:
         include:
         - PROFILE: generic.x86_64
           IB_URL: https://downloads.openwrt.org/releases/22.03.2/targets/x86/64/openwrt-imagebuilder-22.03.2-x86-64.Linux-x86_64.tar.xz
-          PACKAGES: ca-bundle ca-certificates block-mount usbutils coreutils coreutils-base64 curl iperf3 ip-full kmod-nft-tproxy libmbim
-          ##ebtables kmod-ebtables-ipv6 kmod-usb-storage-extras kmod-usb-storage-uas kmod-fs-exfat kmod-fs-vfat 
-          ##kmod-fs-ntfs kmod-fs-ext4 kmod-ipt-nat6 kmod-tun dosfstools ntfs-3g e2fsprogs fdisk libmbedtls luci 
-          ##luci-compat luci-app-wireguard luci-app-samba4 luci-i18n-base-zh-cn luci-i18n-firewall-zh-cn 
-          ##luci-i18n-opkg-zh-cn luci-i18n-samba4-zh-cn mount-utils uhttpd bind-dig knot-dig iperf3 mtr htop 
-          ##tmux nano lsblk etherwake ethtool tcpdump dnsmasq-full -dnsmasq kmod-usb-net-rtl8152 kmod-usb-net-asix 
-          ##kmod-usb-net-asix-ax88179 mwan3 luci-app-mwan3 kmod-macvlan shadowsocks-libev luci-app-shadowsocks 
-          ##luci-app-openclash kmod-inet-diag openvpn-mbedtls luci-app-openvpn zerotier
           INCLUDE_FILES: false
     steps:
     - uses: actions/checkout@master
@@ -162,8 +160,26 @@ jobs:
       env:
         PROFILE: ${{ matrix.PROFILE }}
         IB_URL: ${{ matrix.IB_URL }}
-        PACKAGES: ${{ matrix.PACKAGES }}
       run: |
+        DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
+                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g' | tr '\n' ' ')
+        PACKAGES="$DEFAULT_PACKAGES \
+          -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn \
+          luci-proto-qmi fdisk mosquitto-client-nossl mosquitto-nossl unzip usb-modeswitch \
+          adblock e2fsprogs jsonfilter luci-app-adblock partx-utils r8169-firmware iperf3 mbim-utils qmi-utils \
+          libmbim libqmi modemmanager luci-proto-modemmanager ppp nano openvpn-openssl \
+          luci-ssl-openssl luci-app-commands ca-bundle ca-certificates pciutils usbutils rsync ipset mtr lscpu \
+          luci-proto-wireguard luci-app-wireguard wireguard-tools \
+          kmod-usb-hid kmod-usb3 kmod-usb2 -dnscrypt-proxy -kmod-e1000 kmod-r8169 \
+          kmod-hwmon-core kmod-lib-crc-itu-t kmod-libphy kmod-natsemi kmod-ne2k-pci usbutils pciutils \
+          kmod-usb-net-sierrawireless kmod-usb-serial-sierrawireless kmod-usb-serial-qualcomm \
+          kmod-usb-net-cdc-ether kmod-usb-net-cdc-mbim kmod-usb-net-cdc-ncm kmod-usb-net-hso msmtp sysfsutils \
+          kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan gdb jq jsonfilter speedtest-netperf \
+          -ddns-scripts -ddns-scripts_no-ip_com -ext-samba -ext-sms -kmod-e1000 -kmod-i2c-algo-bit memcached foolsm \
+          -kmod-i2c-core -kmod-ppp -kmod-pppoe -kmod-pppox -ppp-mod-pppoe -kmod-e1000e -kmod-usb-net-huawei-cdc-ncm \
+          -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
+          -luci-app-samba -luci-proto-ppp -luci-theme-bootstrap -luci-theme-darkmatter -mwan3 -ntfs-3g -px5g-mbedtls \
+          -p910nd -luci-app-p910nd -ext-p910nd -samba36-server -wireless-tools -wpad-mini -wwan"
         IB_HOME=$(basename $IB_URL|head -c -8)
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $IB_URL)
         cd $IB_HOME
