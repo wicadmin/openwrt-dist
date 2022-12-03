@@ -94,7 +94,7 @@ jobs:
         ##pushd package/openwrt-dist-luci/tools/po2lmo ; make && sudo make install ; popd
         ./scripts/feeds update -a
         # ./scripts/feeds install golang c-ares libev libopenssl libsodium mbedtls pcre libncursesw6
-        ./scripts/feeds install glib2 dbus ppp
+        ./scripts/feeds install glib2 dbus ppp libxslt
     - name: Compile
       run: |
         cd ~/sdk
