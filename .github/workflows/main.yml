@@ -157,7 +157,7 @@ jobs:
       run: |
         IB_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-${OWRT_TARGET}_${OWRT_SUBTARGET}.tar.xz
         DEFAULT_PACKAGES=$(wget -qO - https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.manifest | sed  's/ - .*/ /' | \
-                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libustream-wolfssl//g' | tr '\n' ' ')
+                        sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libustream-wolfssl20201210//g; s/libwolfssl5.5.1.ee39414e//g' | tr '\n' ' ')
         PACKAGES="$DEFAULT_PACKAGES \
           -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn \
           luci-proto-qmi fdisk mosquitto-client-nossl mosquitto-nossl unzip usb-modeswitch \
@@ -169,7 +169,7 @@ jobs:
           kmod-hwmon-core kmod-lib-crc-itu-t kmod-libphy kmod-natsemi kmod-ne2k-pci usbutils pciutils \
           kmod-usb-net-sierrawireless kmod-usb-serial-sierrawireless kmod-usb-serial-qualcomm \
           kmod-usb-net-cdc-ether kmod-usb-net-cdc-mbim kmod-usb-net-cdc-ncm kmod-usb-net-hso msmtp sysfsutils \
-          kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan gdb jq jsonfilter speedtest-netperf \
+          kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan jq jsonfilter speedtest-netperf \
           -ddns-scripts -ddns-scripts_no-ip_com -ext-samba -ext-sms -kmod-e1000 -kmod-i2c-algo-bit memcached foolsm \
           -kmod-i2c-core -kmod-ppp -kmod-pppoe -kmod-pppox -ppp-mod-pppoe -kmod-e1000e -kmod-usb-net-huawei-cdc-ncm \
           -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
