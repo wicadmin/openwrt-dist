@@ -26,7 +26,7 @@ jobs:
       run: sudo apt install -y libev-dev libc-ares-dev libudns-dev libncurses-dev subversion libglib2.0-dev libdbus-1-dev dbus
     - name: Download Openwrt SDK
       run: |
-        SDK_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+        SDK_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
         SDK_HOME=$(head -c -8 <<< $(basename $SDK_URL))
         wget $SDK_URL
         tar xf $(basename $SDK_URL) -C ~/
@@ -105,7 +105,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        SDK_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+        SDK_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-sdk-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET_gcc-$OWRT_SDK_VERSION_musl.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $SDK_URL)
         # Upload base only
         cd ~/sdk/bin/packages/*/base
@@ -131,13 +131,13 @@ jobs:
       run: sudo apt install -y libncurses-dev
     - name: Download Openwrt ImageBuilder
       run: |
-        IB_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+        IB_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
         wget $IB_URL
         tar xf $(basename $IB_URL)
     - name: Fetch Files
       if: matrix.INCLUDE_FILES
       run: |
-        IB_URL: https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
+        IB_URL=https://downloads.openwrt.org/releases/$OWRT_RELEASE/targets/$OWRT_TARGET/$OWRT_SUBTARGET/openwrt-imagebuilder-$OWRT_RELEASE-$OWRT_TARGET-$OWRT_SUBTARGET.Linux-$OWRT_TARGET_$OWRT_SUBTARGET.tar.xz
         IB_HOME=$(basename $IB_URL|head -c -8)
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $IB_URL)
         cd $IB_HOME
