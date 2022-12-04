@@ -209,7 +209,7 @@ jobs:
         df -h
         sed -i 's/^\s*\(CONFIG_TARGET_ROOTFS_PARTSIZE\)\s*=\s*[^#\n \t]*/\1=512/' .config
         sed -i 's/^\s*\(CONFIG_TARGET_KERNEL_PARTSIZE\)\s*=\s*[^#\n \t]*/\1=16/' .config
-        echo "Listing .config"
+        echo ".config in buildimg and SED changes"
         cat .config
         TERM=xterm-256color make image "${makeopts[@]}"
     - name: Upload
