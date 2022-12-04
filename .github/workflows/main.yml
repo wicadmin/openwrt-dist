@@ -22,7 +22,7 @@ jobs:
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
       with:
-        root-reserve-mb: 1024
+        root-reserve-mb: 4096
         swap-size-mb: 1024
         remove-dotnet: 'true'
         remove-android: 'true'
@@ -106,7 +106,11 @@ jobs:
         cd ~/sdk
         make defconfig
         # Edit config
-        make V=s
+        cat "CONFIG_CCACHE=y" >> .config
+        cat "CONFIG_DEVEL=y"  >> .config
+        cat "CONFIG_BUILD_LOG=y"  >> .config
+        # make V=s
+        make -j$(nproc) clean download world
     - name: Upload
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
