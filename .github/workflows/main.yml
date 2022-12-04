@@ -106,8 +106,7 @@ jobs:
         cd ~/sdk
         echo "Number of processors:" 
         echo $(nproc)
-        echo ".config in buildpkg BEFORE make defconfig"
-        cat .config
+
         make defconfig
         # Edit config
         echo ".config in buildpkg AFTER make defconfig"
