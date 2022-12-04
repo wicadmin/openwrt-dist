@@ -208,9 +208,11 @@ jobs:
         make info
         echo "Checking disk space"
         df -h
+        sed -i 's/^\s*\(CONFIG_TARGET_ROOTFS_PARTSIZE\)\s*=\s*[^#\n \t]*/\1=512/' .config
+        sed -i 's/^\s*\(CONFIG_TARGET_KERNEL_PARTSIZE\)\s*=\s*[^#\n \t]*/\1=16/' .config
         echo "Listing .config"
         cat .config
-        TERM=xterm-256color make image CONFIG_TARGET_KERNEL_PARTSIZE=16 CONFIG_TARGET_ROOTFS_PARTSIZE=2048 "${makeopts[@]}"
+        TERM=xterm-256color make image "${makeopts[@]}"
     - name: Upload
       id: upload
       env:
