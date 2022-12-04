@@ -104,10 +104,12 @@ jobs:
     - name: Compile
       run: |
         cd ~/sdk
+        echo "Number of processors:" 
+        echo $(nproc)
         make defconfig
         # Edit config
         # make V=s
-        make clean download world
+        # make clean download world
         make -j$(nproc) V=s
     - name: Upload
       env:
