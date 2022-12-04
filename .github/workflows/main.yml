@@ -204,6 +204,8 @@ jobs:
         make info
         echo "Checking disk space"
         df -h
+        echo "Listing .config"
+        cat .config
         TERM=xterm-256color make image CONFIG_TARGET_KERNEL_PARTSIZE=16 CONFIG_TARGET_ROOTFS_PARTSIZE=2048 "${makeopts[@]}"
     - name: Upload
       id: upload
