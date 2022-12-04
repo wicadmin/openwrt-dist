@@ -202,6 +202,8 @@ jobs:
         makeopts=("PROFILE=${PROFILE%.*}" "PACKAGES=$PACKAGES")
         [[ -d files ]] && makeopts+=("FILES=files/")
         make info
+        echo "Checking disk space"
+        df -h
         TERM=xterm-256color make image "${makeopts[@]}"
     - name: Upload
       id: upload
