@@ -106,11 +106,9 @@ jobs:
         cd ~/sdk
         make defconfig
         # Edit config
-        cat "CONFIG_CCACHE=y" >> .config
-        cat "CONFIG_DEVEL=y"  >> .config
-        cat "CONFIG_BUILD_LOG=y"  >> .config
         # make V=s
-        make -j$(nproc) clean download world
+        make clean download world
+        make -j$(nproc) V=s
     - name: Upload
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
