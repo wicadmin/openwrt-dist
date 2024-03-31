@@ -7,7 +7,7 @@ on:
   # [workflow_dispatch]
 
 env:
-  OWRT_RELEASE: 22.05.3
+  OWRT_RELEASE: 23.05.3
   OWRT_TARGET: x86
   OWRT_SUBTARGET: 64
   OWRT_SDK_VERSION: 12.3.0
