@@ -15,7 +15,7 @@ env:
 jobs:
   buildpkg:
     name: Build Openwrt Package
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
     steps:
@@ -41,7 +41,7 @@ jobs:
     - name: Prep libmbim
       env:
         PRJ_NAME: libmbim
-        VERSION: 1.28.2
+        VERSION: 1.30.0
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
@@ -61,7 +61,7 @@ jobs:
     - name: Prep libqmi
       env:
         PRJ_NAME: libqmi
-        VERSION: 1.32.2
+        VERSION: 1.34.0
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
@@ -71,7 +71,7 @@ jobs:
     - name: Prep modemmanager
       env:
         PRJ_NAME: modemmanager
-        VERSION: 1.20.2
+        VERSION: 1.22.0
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
