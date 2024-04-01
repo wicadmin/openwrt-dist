@@ -45,7 +45,7 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        mkdir package
+        
         git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
         pushd packages
         git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
@@ -62,7 +62,7 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        mkdir package
+        
         git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
         pushd packages
         git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
@@ -78,7 +78,7 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        mkdir package
+        
         git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
         pushd packages
         git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
@@ -94,7 +94,7 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        mkdir package
+        
         git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
         pushd packages
         git --work-tree=../package checkout HEAD -- net/$PRJ_NAME
