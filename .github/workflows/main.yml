@@ -45,7 +45,14 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        mkdir package
+        git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
+        pushd packages
+        git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
+        popd
+        mv package/libs/$PRJ_NAME package/$PRJ_NAME
+        
+        # svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
         sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
         cat package/$PRJ_NAME/Makefile
     - name: Prep libqrtr-glib
@@ -55,7 +62,13 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        mkdir package
+        git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
+        pushd packages
+        git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
+        popd
+        mv package/libs/$PRJ_NAME package/$PRJ_NAME
+        # svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
         sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
         cat package/$PRJ_NAME/Makefile
     - name: Prep libqmi
@@ -65,7 +78,13 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
+        mkdir package
+        git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
+        pushd packages
+        git --work-tree=../package checkout HEAD -- libs/$PRJ_NAME
+        popd
+        mv package/libs/$PRJ_NAME package/$PRJ_NAME
+        # svn checkout https://github.com/openwrt/packages/trunk/libs/$PRJ_NAME package/$PRJ_NAME
         sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
         cat package/$PRJ_NAME/Makefile
     - name: Prep modemmanager
@@ -75,7 +94,13 @@ jobs:
       run: |
         cd ~/sdk
         # mkdir -p package/$PRJ_NAME
-        svn checkout https://github.com/openwrt/packages/trunk/net/$PRJ_NAME package/$PRJ_NAME
+        mkdir package
+        git clone --no-checkout --depth=1 https://github.com/openwrt/packages.git
+        pushd packages
+        git --work-tree=../package checkout HEAD -- net/$PRJ_NAME
+        popd
+        mv package/net/$PRJ_NAME package/$PRJ_NAME
+        # svn checkout https://github.com/openwrt/packages/trunk/net/$PRJ_NAME package/$PRJ_NAME
         sed -i 's/^PKG_SOURCE_VERSION.*/PKG_SOURCE_VERSION:='"$VERSION"'/' package/$PRJ_NAME/Makefile
         cat package/$PRJ_NAME/Makefile
     - name: Download Packages
