@@ -210,7 +210,7 @@ jobs:
           -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
           -luci-app-samba -luci-proto-ppp -luci-theme-bootstrap -luci-theme-darkmatter -mwan3 -ntfs-3g -px5g-mbedtls \
           -p910nd -luci-app-p910nd -ext-p910nd -samba36-server -wireless-tools -wpad-mini -wwan rclone \
-          -openvpn-openssl -luci-ssl-openssl libwolfssl5.5.3.ee39414e"
+          -openvpn-openssl -luci-ssl-openssl"
         IB_HOME=$(basename $IB_URL|head -c -8)
         TAG=$(sed -n 's/.*targets\/\(\w*\)\/\(\w*\)\/.*/packages\/\1\/\2/p' <<< $IB_URL)
         cd $IB_HOME
