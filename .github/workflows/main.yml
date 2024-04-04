@@ -204,7 +204,7 @@ jobs:
           kmod-hwmon-core kmod-lib-crc-itu-t kmod-libphy kmod-natsemi kmod-ne2k-pci usbutils pciutils \
           kmod-usb-net-sierrawireless kmod-usb-serial-sierrawireless kmod-usb-serial-qualcomm \
           kmod-usb-net-cdc-ether kmod-usb-net-cdc-mbim kmod-usb-net-cdc-ncm kmod-usb-net-hso msmtp sysfsutils \
-          kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan jq jsonfilter speedtest-netperf \
+          kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan jq jsonfilter speedtest-netperf qfirehose \
           -ddns-scripts -ddns-scripts_no-ip_com -ext-samba -ext-sms -kmod-e1000 -kmod-i2c-algo-bit memcached foolsm \
           -kmod-i2c-core -kmod-ppp -kmod-pppoe -kmod-pppox -ppp-mod-pppoe -kmod-e1000e -kmod-usb-net-huawei-cdc-ncm \
           -libsodium -libustream-mbedtls -libustream-wolfssl -luci-app-hotspot \
