@@ -195,7 +195,7 @@ jobs:
                         sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libwolfssl5.5.1.ee39414e//g' | tr '\n' ' ')
         #                sed 's/dnsmasq//g; s/kmod-e1000\ //g; s/kmod-ppp\ //g; s/kmod-pppoe\ //g; s/kmod-ppox\ //g; s/luci-proto-ppp//g; s/ppp\ //g; s/ppp-mod-pppoe//g; s/kmod-e1000e//g; s/libustream-wolfssl20201210//g; s/libwolfssl5.5.1.ee39414e//g' | tr '\n' ' ')
         PACKAGES="$DEFAULT_PACKAGES \
-          -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn htop qfirehose dmidecode \
+          -luci-ssl -dnsmasq dnsmasq-full lm-sensors-detect bash curl diffutils jq luci-app-openvpn htop qfirehose dmidecode speedtestcpp \
           luci-proto-qmi fdisk mosquitto-client-nossl mosquitto-nossl unzip usb-modeswitch \
           adblock e2fsprogs jsonfilter luci-app-adblock partx-utils r8169-firmware iperf3 mbim-utils qmi-utils \
           libmbim libqmi modemmanager luci-proto-modemmanager ppp nano luci-app-commands ca-bundle ca-certificates pciutils usbutils rsync ipset mtr lscpu \
