@@ -1,0 +1,7 @@
+92a4bb4aeaa1d109a21be0a134c5b413c656a3b981720277899b887b9e315bdb *openwrt-23.05.3-x86-64-generic-ext4-combined-efi.img.gz
+c1f5e25566f50459a1814d7ddfe9c3ee8057de8d5ca751f8243e6d8e00c3dc22 *openwrt-23.05.3-x86-64-generic-ext4-combined.img.gz
+de7f20a7fc2ed6e7113ef764d9b3bc232fffdd6820914100dfd715114e5ce26a *openwrt-23.05.3-x86-64-generic-ext4-rootfs.img.gz
+0324fd5a691fe8dd58ea289db87ce6b39b3f2f2be6d5eb4d9e8039c0759a59f2 *openwrt-23.05.3-x86-64-generic-kernel.bin
+126308f50cea90aa8d0bf196bd2b5e58b1f2fdde839247d3593fd13fb6afc480 *openwrt-23.05.3-x86-64-generic-rootfs.tar.gz
+543b079d17bea37a08a5f56a05280951d4ce7f91e3616adf70487a0618950b03 *openwrt-23.05.3-x86-64-generic.manifest
+10b91c672f6b0ac12fd52c874f1565c4206c169349728dbdeeb4214fdca2453a *profiles.json
