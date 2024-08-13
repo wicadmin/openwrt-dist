@@ -249,7 +249,7 @@ jobs:
         git add .
         git commit -m "$PROFILE$(TZ='America/New_York' date +@%Y%m%d)"
         git push --force --quiet "https://wicadmin:$GITHUB_TOKEN@github.com/wicadmin/openwrt-dist.git" HEAD:image/$PROFILE
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: image_${{ matrix.PROFILE }}
         path: ./image
